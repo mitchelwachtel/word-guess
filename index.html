@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/reset.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>Word Guess</title>
+  </head>
+  <body>
+    <header>
+      <h1>Word Guess Game!</h1>
+      <p>
+        You have 10 seconds to guess the word with your keyboard. <br />
+        Press <span class="special-text">Start</span> when you are ready!
+      </p>
+    </header>
+
+    <main>
+      <div class="game-space"></div>
+      <aside class="stats">
+        <div class="timer-button">
+          <button id="start">START</button>
+          <div id="timer"></div>
+        </div>
+        <div class="scoreboard">
+          <div id="wins">Wins: 0</div>
+          <div id="loses">Loses: 0</div>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <h2>Mitchel Wachtel - January 2022</h2>
+    </footer>
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>

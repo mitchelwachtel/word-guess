@@ -1,0 +1,58 @@
+:root {
+    --red: #F00001;
+    --grey: hsl(0, 0%, 65%);
+
+}
+
+header {
+  background-image: url(../images/Question-Marks.jpeg);
+  text-align: center;
+  padding: 25px;
+}
+
+h1 {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 65px;
+  padding-bottom: 15px;
+  color: black;
+  text-shadow: 1px 1px var(--grey);
+  font-weight: 900;
+}
+p {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: 900;
+    color: black;
+    text-shadow: 1px 1px var(--grey);
+}
+
+main {
+  display: flex;
+}
+
+.game-space {
+  width: 70%;
+  height: 450px;
+  background-color: green;
+}
+
+.stats {
+  width: 30%;
+  background-color: red;
+}
+
+.timer-button {
+  height: 50%;
+  background-color: aqua;
+}
+
+.scoreboard {
+  height: 50%;
+}
+
+button {
+  background-color: brown;
+}
+
+footer {
+    text-align: center;
+}
