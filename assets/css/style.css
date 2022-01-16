@@ -40,6 +40,7 @@ main {
   align-items: center;
   font-size: 140px;
   padding: 15px;
+  letter-spacing: 30px;
 }
 
 .stats {
