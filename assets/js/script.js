@@ -10,37 +10,57 @@ var words = [
   "quick",
   "jump",
 ];
-var buttonEl = document.getElementById("start");
+var startButtonEl = document.getElementById("start");
+var resetButtonEl = document.getElementById('reset');
 var timerEl = document.getElementById("timer");
 var winsEl = document.getElementById("wins");
 var losesEl = document.getElementById("loses");
 var wordArray = [];
+var displayArray = [];
+var gameSpace = document.querySelector(".game-space");
 
-var wins = 0;
-var loses = 0;
+if (localStorage.getItem("wins") !== null) {
+  var wins = parseFloat(localStorage.getItem("wins"));
+} else {
+  var wins = 0;
+}
+
+if (localStorage.getItem("loses") !== null) {
+  var loses = parseFloat(localStorage.getItem("loses"));
+} else {
+  var loses = 0;
+}
+
 var secLeft = 10;
 
-buttonEl.addEventListener("click", startGame);
+winsEl.textContent = wins;
+losesEl.textContent = loses;
+
+startButtonEl.addEventListener("click", startGame);
+document.addEventListener("keydown", press);
+resetButtonEl.addEventListener("click", resetLocalStorage);
 
 function startGame() {
-// TODO: this does a great job of preventing a second game, but the first the startGame function must end!  
-// buttonEl.addEventListener("click", stop);
+// TODO: Deal with the double clicking of the Start button. How do I get the first game to stop? The following code reloads the page on second start click but doesn't start the game.
+  
+  
+  // startButtonEl.addEventListener("click", stop);
 
-//   function stop() {
-//     alert("You can only play 1 game at once");
-//     location.reload();
-//     return;
-//   }
+  // function stop() {
+  //   location.reload();
+  //   startGame();
+  // }
 
   console.log(wordArray);
-  var gameSpace = document.querySelector(".game-space");
+  
   secLeft = 10;
   var specialWord = words[Math.floor(Math.random() * words.length)];
   wordArray = specialWord.split("");
-  var displayArray = [];
+  
 
-  wordBlanks(wordArray);
   displayArray = wordBlanks(wordArray);
+
+ 
 
   var timer = setInterval(function () {
     timerEl.textContent = secLeft;
@@ -49,25 +69,28 @@ function startGame() {
       clearInterval(timer);
       if (displayArray.includes("_")) {
         loses += 1;
-        losesEl.textContent = "Loses: " + loses;
+        losesEl.textContent = loses;
+        localStorage.setItem("loses", loses);
         displayArray = wordArray;
         gameSpace.textContent = specialWord;
         return;
       } else {
         wins += 1;
-        winsEl.textContent = "Wins: " + wins;
+        winsEl.textContent = wins;
+        localStorage.setItem("wins", wins);
         return;
       }
     }
     if (displayArray.includes("_") === false) {
       clearInterval(timer);
       wins += 1;
-      winsEl.textContent = "Wins: " + wins;
+      winsEl.textContent = wins;
+      localStorage.setItem("wins", wins);
       return;
     }
   }, 1000);
 
-  document.addEventListener("keydown", press);
+  
 
   function wordBlanks(x) {
     var y = "";
@@ -81,22 +104,27 @@ function startGame() {
     return displayArray;
   }
 
-  function press(event) {
-    if (wordArray.includes(event.key)) {
-      console.log(wordArray);
-      for (i = 0; i < wordArray.length; i++) {
-        var a = wordArray.indexOf(event.key, i);
-        displayArray[a] = event.key;
-        gameSpace.textContent = displayArray.join("");
-      }
-      return;
-    } else {
-      return;
-    }
-  }
 
-//   This is my attempt at getting the function to STOP
-  if (displayArray.includes("_") === false) {
-    return;
-  }
+return;
+}
+
+function press(event) {
+  if (wordArray.includes(event.key)) {
+    console.log(wordArray);
+    for (i = 0; i < wordArray.length; i++) {
+      var a = wordArray.indexOf(event.key, i);
+      displayArray[a] = event.key;
+      gameSpace.textContent = displayArray.join("");
+    }
+  } 
+}
+
+function resetLocalStorage() {
+      wins = 0;
+      winsEl.textContent = wins;
+      localStorage.setItem("wins", wins);
+      loses = 0;
+      losesEl.textContent = loses;
+      localStorage.setItem("loses", loses);
+
 }
